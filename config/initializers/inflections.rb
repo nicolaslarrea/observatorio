@@ -17,9 +17,12 @@
 #
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'carrera', 'carreras'
-  inflect.irregular 'cuatrimestre', 'cuatrimestres'
   inflect.irregular 'materia', 'materias'
+  inflect.irregular 'catedra', 'catedras'
+  #TODO Falta ver si tengo que pone acá ListadoHorario
+  inflect.irregular 'inscripcion', 'inscripciones'
+  inflect.irregular 'titular', 'titulares'
+  inflect.irregular 'curso', 'cursos'
   inflect.irregular 'docente', 'docentes'
+  inflect.irregular 'vacante', 'vacantes'
 end
-
-
