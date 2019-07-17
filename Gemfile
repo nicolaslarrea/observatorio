@@ -72,6 +72,7 @@ gem 'rails-i18n'
 gem 'activeadmin'
 gem 'devise'
 gem 'devise-i18n'
+gem 'kaminari-i18n'
 
 # Para subir a la base de datos.
 gem 'colorize'
