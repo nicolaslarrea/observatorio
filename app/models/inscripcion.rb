@@ -4,4 +4,9 @@ class Inscripcion < ApplicationRecord
 
   validates :ano, presence: true
   validates :cuatrimestre, presence: true, uniqueness: { scope: :ano }
+
+  def display_name
+    self.ano.to_s + ' cuat ' +  self.cuatrimestre.to_s
+  end
+
 end
