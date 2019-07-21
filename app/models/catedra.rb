@@ -6,7 +6,7 @@ class Catedra < ApplicationRecord
   validates :codigo, presence: true, uniqueness: true
 
   def display_name
-    self.codigo.to_s + ' - ' +  self.materia.nombre
+    "#{codigo} - #{materia.nombre}"
   end
 
 end
