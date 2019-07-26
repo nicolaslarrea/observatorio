@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2019_07_12_202505) do
 
   create_table "catedras", force: :cascade do |t|
     t.integer "materia_id"
-    t.integer "numero"
+    t.string "numero"
     t.integer "codigo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
