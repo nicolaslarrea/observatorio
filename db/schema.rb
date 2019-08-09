@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_12_202505) do
+ActiveRecord::Schema.define(version: 2019_07_21_024244) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2019_07_12_202505) do
     t.integer "codigo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["codigo"], name: "index_catedras_on_codigo"
     t.index ["materia_id"], name: "index_catedras_on_materia_id"
   end
 
@@ -75,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_07_12_202505) do
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["nombre"], name: "index_docentes_on_nombre"
   end
 
   create_table "inscripciones", force: :cascade do |t|
@@ -90,6 +92,7 @@ ActiveRecord::Schema.define(version: 2019_07_12_202505) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["carrera_id"], name: "index_materias_on_carrera_id"
+    t.index ["nombre"], name: "index_materias_on_nombre"
   end
 
   create_table "oferta_en_listas", force: :cascade do |t|
@@ -107,6 +110,7 @@ ActiveRecord::Schema.define(version: 2019_07_12_202505) do
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["nombre"], name: "index_titulares_on_nombre"
   end
 
   create_table "vacantes", force: :cascade do |t|
@@ -116,6 +120,7 @@ ActiveRecord::Schema.define(version: 2019_07_12_202505) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["curso_id"], name: "index_vacantes_on_curso_id"
+    t.index ["fecha"], name: "index_vacantes_on_fecha"
   end
 
 end
