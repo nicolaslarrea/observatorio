@@ -54,6 +54,7 @@ namespace :scrapeos do
               fin: curso[3],
               obligatorio: curso[7]
             )
+
             # Quizas nuevo_curso y vacantes necesiten un find_or_create_by
             nuevo_curso.vacantes.find_or_create_by(
               numero: curso[6],
