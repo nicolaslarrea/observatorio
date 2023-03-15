@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  day: MyString
+  starts_at: MyString
+  ends_at: MyString
+  type: 
+  teacher: MyString
+  vacancy: 1
+  mandatory: MyString
+  clasrrom: MyString
+  observations: MyString
+  semester: one
+  subject: one
+
+two:
+  number: MyString
+  day: MyString
+  starts_at: MyString
+  ends_at: MyString
+  type: 
+  teacher: MyString
+  vacancy: 1
+  mandatory: MyString
+  clasrrom: MyString
+  observations: MyString
+  semester: two
+  subject: two

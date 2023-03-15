@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_15_144745) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_15_193328) do
+  create_table "courses", force: :cascade do |t|
+    t.string "number"
+    t.string "day"
+    t.string "starts_at"
+    t.string "ends_at"
+    t.string "kind"
+    t.string "teacher"
+    t.integer "vacancy"
+    t.string "mandatory"
+    t.string "classroom"
+    t.string "observations"
+    t.integer "semester_id", null: false
+    t.integer "subject_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["semester_id"], name: "index_courses_on_semester_id"
+    t.index ["subject_id"], name: "index_courses_on_subject_id"
+  end
+
   create_table "degrees", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
@@ -35,5 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_144745) do
     t.index ["degree_id"], name: "index_subjects_on_degree_id"
   end
 
+  add_foreign_key "courses", "semesters"
+  add_foreign_key "courses", "subjects"
   add_foreign_key "subjects", "degrees"
 end

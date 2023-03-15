@@ -12,8 +12,8 @@ def get_semester
   year = Time.now.year
   number = Time.now.month <= 6 ? 1 : 2
 
-  current_semester = Semester.find_or_create_by(year: year, number: number)
-  puts "Año #{current_semester.year} cuat #{current_semester.number}".yellow.bold
+  @current_semester = Semester.find_or_create_by(year: year, number: number)
+  puts "Año #{@current_semester.year} cuat #{@current_semester.number}".yellow.bold
 end
 
 def get_subjects
@@ -21,7 +21,7 @@ def get_subjects
   begin
     subjects_page = Nokogiri::HTML(URI.open("#{url}Ope154_.php"))
   rescue StandardError=>e
-    puts "No pude conectar reintentando..."
+    puts "No pude conectar con la página #{subjects_page} reintentando..."
     sleep 1
     retry
   else
@@ -36,9 +36,41 @@ def get_subjects
             subject.chair = chair
           end
 
-          puts "  #{degree.abbreviation} - #{current_subject.code} #{current_subject.name} #{current_subject.chair}".green
+          print "  #{degree.abbreviation} - #{current_subject.code} #{current_subject.name} #{current_subject.chair}".green
+          get_courses(current_subject)
         end
       }
     }
+  end
+end
+
+def get_courses(subject)
+  begin
+    courses_page = Nokogiri::HTML(URI.open("http://academica.psi.uba.ar/Psi/Ver154_.php?catedra=#{subject.code}"))
+  rescue StandardError=>e
+    puts "No pude encontrar la materia #{subject.code}, reintentando..."
+    sleep 1
+    retry
+  else
+    courses_page.css('table').search('tr').each {|row|
+      if row.search('td').count == 10
+        Course.create(     
+        number: row.search('td')[0].content.gsub(/[[:space:]]/," ").strip,
+        day: row.search('td')[1].content.gsub(/[[:space:]]/," ").strip,
+        starts_at: row.search('td')[2].content.gsub(/[[:space:]]/," ").strip,
+        ends_at: row.search('td')[3].content.gsub(/[[:space:]]/," ").strip,
+        kind: row.search('td')[4].content.gsub(/[[:space:]]/," ").strip,
+        teacher: row.search('td')[5].content.gsub(/[[:space:]]/," ").strip, 
+        vacancy: row.search('td')[6].content.gsub(/[[:space:]]/," ").strip,
+        mandatory: row.search('td')[7].content.gsub(/[[:space:]]/," ").strip,
+        classroom: row.search('td')[8].content.gsub(/[[:space:]]/," ").strip,
+        observations: row.search('td')[9].content.gsub(/[[:space:]]/," ").strip,
+        subject: subject,
+        semester: @current_semester
+        )     
+        print ".".green
+      end
+    }
+    puts
   end
 end
