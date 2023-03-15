@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+# Creates the fixed Degrees needed to be able to Scrap.
+[['Lic. en Psicología','PS'],['Prof. en Psicología','PR'],['Lic. en Musicoterapia','LM'],['Lic. en Terapia Ocupacional','TE']].each do | name, abbreviation|
+  Degree.create(name: name , abbreviation: abbreviation )
+end
