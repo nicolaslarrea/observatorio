@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 
 namespace :scraper do
-  desc 'Scrapear y pasar a Db'
+  desc 'Scraps and updates Db'
 
   task run: :environment do
     get_inscription
