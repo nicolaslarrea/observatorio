@@ -4,7 +4,17 @@ namespace :scraper do
   task run: :environment do
     get_semester
 
-    get_subjects
+    28.times do
+      number = Scrap.where(semester: @current_semester).last&.number|| 0
+
+      @current_scrap = Scrap.create(semester: @current_semester, number: number + 1)
+
+      get_subjects
+
+      puts Time.now
+      puts "Esperando a próxima pasada en 6 horas..."
+      sleep 21600      
+    end
   end
 end
 
@@ -66,7 +76,8 @@ def get_courses(subject)
         classroom: row.search('td')[8].content.gsub(/[[:space:]]/," ").strip,
         observations: row.search('td')[9].content.gsub(/[[:space:]]/," ").strip,
         subject: subject,
-        semester: @current_semester
+        semester: @current_semester,
+        scrap: @current_scrap
         )     
         print ".".green
       end
